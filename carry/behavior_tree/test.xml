@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Repeat num_cycles="5">
+            <Sequence>
+                <Delay delay_msec="1000">
+                    <Action ID="FirstClientCall"/>
+                </Delay>
+                <Delay delay_msec="1000">
+                    <Action ID="SecondClientCall"/>
+                </Delay>
+            </Sequence>
+        </Repeat>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="FirstClientCall"/>
+        <Action ID="SecondClientCall"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
