@@ -12,6 +12,7 @@ SecondClientCall::SecondClientCall(const std::string& name, const NodeConfigurat
 
 NodeStatus SecondClientCall::tick()
 {
+    
     if (!client_->wait_for_service(std::chrono::seconds(1))) {
         RCLCPP_ERROR(node_->get_logger(), "Service not available");
         return BT::NodeStatus::FAILURE;

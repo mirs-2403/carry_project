@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <BehaviorTree ID="BehaviorTree">
+        <Switch2 variable="{some_value}">
+            <Case value="0">
+                <Action ID="FirstClientCall"/>
+            </Case>
+            <Case value="1">
+                <Action ID="SecondClientCall"/>
+            </Case>
+        </Switch3>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="FirstClientCall"/>
+        <Action ID="SecondClientCall"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
