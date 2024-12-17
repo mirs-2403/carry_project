@@ -1,0 +1,15 @@
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/ament_index/resource_index/package_run_dependencies/carry_msgs
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/ament_index/resource_index/parent_prefix_path/carry_msgs
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/environment/ament_prefix_path.sh
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/environment/ament_prefix_path.dsv
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/environment/path.sh
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/environment/path.dsv
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/local_setup.bash
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/local_setup.sh
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/local_setup.zsh
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/local_setup.dsv
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/package.dsv
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/ament_index/resource_index/packages/carry_msgs
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/cmake/carry_msgsConfig.cmake
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/cmake/carry_msgsConfig-version.cmake
+/home/oumuika/Documents/mirs2403/src/carry_project/install/carry_msgs/share/carry_msgs/package.xml

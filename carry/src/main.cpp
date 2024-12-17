@@ -4,14 +4,31 @@
 #include "bt_actions/random_goal.hpp"
 #include "bt_actions/check_call_service.hpp"
 #include "bt_actions/print_message_action.hpp"
+#include "bt_actions/subscribe_pose.hpp"
+#include "bt_actions/is_called_service.hpp"
 //#include "behaviortree_cpp/loggers/groot2_publisher.h"
 #include "behaviortree_cpp_v3/loggers/bt_zmq_publisher.h"
 //#include "nav2_bt_navigator/navigators/navigate_to_pose.hpp"
 #include "nav2_behavior_tree/plugins/action/navigate_to_pose_action.hpp"
+#include "nav2_behavior_tree/plugins/action/controller_cancel_node.hpp"
 #include "nav2_behavior_tree/bt_action_node.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
+#include "bt_actions/cancel_nav2.hpp"
 
-#define BT_XML "/home/oumuika/Documents/mirs2403/src/carry_project/carry/behavior_tree/test_4.xml"
+#include <iostream>
+#include <filesystem>
+#include <vector>
+#include <string>
+
+//#include "behaviortree_cpp/utils/shared_library.h"
+//#include "behaviortree_cpp/xml_parsing.h"
+
+//#include "plugins_list.hpp"
+//#include "nav2_util/string_utils.hpp"
+
+#define BT_XML "/home/oumuika/Documents/mirs2403/src/carry_project/carry/behavior_tree/test_6.xml"
+
+namespace fs = std::filesystem;
 
 int main(int argc, char **argv) {
     rclcpp::init(argc, argv);
@@ -25,7 +42,7 @@ int main(int argc, char **argv) {
     auto blackboard = BT::Blackboard::create();
     blackboard->set("node", ros_node);
 
-    /*
+    
     geometry_msgs::msg::PoseStamped goal;
     goal.header.frame_id = "map"; // 目標座標系（例: "map"）
     goal.header.stamp = rclcpp::Clock().now(); // 現在時刻
@@ -55,15 +72,48 @@ int main(int argc, char **argv) {
     std::chrono::milliseconds wait_for_service_timeout(10000);
     // Blackboardに設定
     blackboard->set("wait_for_service_timeout", wait_for_service_timeout);
-    */
-
+    
+    
+    BT::NodeBuilder node_builder = [&ros_node](const std::string& name, const NodeConfiguration& config) {
+        return std::make_unique<SubscribePose>(name, config, ros_node);
+    };
+    
     // Actionノードの登録
     factory.registerNodeType<FirstClientCall>("FirstClientCall");
     factory.registerNodeType<SecondClientCall>("SecondClientCall");
     factory.registerNodeType<RandomGoalGenerateAction>("GenerateRandomGoal");
     factory.registerNodeType<CheckCallService>("CheckCallService");
+    factory.registerNodeType<IsCalledService>("IsCalledService");
     factory.registerNodeType<PrintMessageAction>("PrintMessage");
-    factory.registerFromPlugin("/opt/ros/humble/lib/libnav2_navigate_to_pose_action_bt_node.so");
+    factory.registerNodeType<CancelNav2>("CancelNav2");
+    factory.registerBuilder<SubscribePose>("SubscribePose", node_builder);
+
+    std::vector<std::string> plugin_files;
+
+    std::string plugin_directory = "/opt/ros/humble/lib";
+
+    // 1. ディレクトリを探索し、"_bt_node.so" で終わるファイルを取得
+    for (const auto &entry : fs::directory_iterator(plugin_directory)) {
+        if (entry.is_regular_file()) {  // 通常ファイルのみ対象
+        std::string file_path = entry.path().string();
+        if (file_path.find("_bt_node.so") != std::string::npos) {  // "_bt_node.so" で終わるか確認
+            plugin_files.push_back(file_path);
+        }
+        }
+    }
+
+    // 2. 各プラグインファイルをファクトリに登録
+    for (const auto &plugin : plugin_files) {
+        try {
+        std::cout << "Loading: " << plugin << "\n";
+        factory.registerFromPlugin(plugin);  // プラグインの登録
+        } catch (const std::exception &e) {
+        std::cerr << "Failed to load plugin: " << plugin << ", Error: " << e.what() << "\n";
+        }
+    }
+
+    //factory.registerFromPlugin("/opt/ros/humble/lib/libnav2_navigate_to_pose_action_bt_node.so");
+    //factory.registerFromPlugin("/opt/ros/humble/lib/libnav2_controller_cancel_bt_node.so");
 
     // XMLファイルからツリーを読み込む
     auto tree = factory.createTreeFromFile(BT_XML, blackboard);

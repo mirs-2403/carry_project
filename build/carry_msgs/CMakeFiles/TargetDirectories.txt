@@ -1,0 +1,9 @@
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/uninstall.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/carry_msgs_uninstall.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/test.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/edit_cache.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/rebuild_cache.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/list_install_components.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/install.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/install/local.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry_msgs/CMakeFiles/install/strip.dir

@@ -12,6 +12,7 @@
   <depend>rclcpp</depend>
   <depend>behaviortree_cpp_v3</depend>
   <depend>mirs_msgs</depend>
+  <depend>carry_msgs</depend>
 
   <depend>nav2_util</depend>
   <depend>nav_msgs</depend>

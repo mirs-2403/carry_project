@@ -1,0 +1,5 @@
+[35m[1mConsolidate compiler generated dependencies of target test_client[0m
+[35m[1mConsolidate compiler generated dependencies of target bt_executor[0m
+[ 25%] Built target test_client
+[ 50%] [32mBuilding CXX object CMakeFiles/bt_executor.dir/src/main.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/bt_executor.dir/src/check_call_service.cpp.o[0m

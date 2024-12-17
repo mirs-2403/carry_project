@@ -8,6 +8,7 @@ find_package(rclcpp_action REQUIRED)
 #find_package(behaviortree_cpp REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)
 find_package(mirs_msgs REQUIRED)
+find_package(carry_msgs REQUIRED)
 
 find_package(nav2_util REQUIRED)
 find_package(nav_msgs REQUIRED)
@@ -27,12 +28,13 @@ add_executable(bt_executor
   src/first_test.cpp
   src/second_test.cpp
   src/random_goal.cpp
-  src/check_call_service.cpp
+  #src/check_call_service.cpp
 )
 ament_target_dependencies(bt_executor
   rclcpp
   rclcpp_action
   mirs_msgs
+  carry_msgs
   #behaviortree_cpp
   behaviortree_cpp_v3
   nav2_util

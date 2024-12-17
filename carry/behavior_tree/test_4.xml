@@ -3,17 +3,21 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
-            <Action ID="CheckCallService" member="" node="{node}" status="{status}"/>
+            <Action ID="IsCalledService" member="" node="{node}" status="{status}"/>
             <Inverter>
                 <KeepRunningUntilFailure>
                     <Delay delay_msec="250">
-                        <BlackboardCheckString return_on_mismatch="SUCCESS" value_A="{status}" value_B="1">
-                            <AlwaysFailure/>
-                        </BlackboardCheckString>
+                        <Inverter>
+                            <Switch2 case_1="0" case_2="1" variable="{status}">
+                                <Action ID="PrintMessage" message="rect"/>
+                                <Action ID="PrintMessage" message="fan"/>
+                                <AlwaysFailure/>
+                            </Switch2>
+                        </Inverter>
                     </Delay>
                 </KeepRunningUntilFailure>
             </Inverter>
-            <Action ID="PrintMessage" message="Hello World!"/>
+            <Action ID="PrintMessage" message="END!"/>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -149,6 +153,11 @@
             <input_port name="is_voltage">Bool if check based on voltage or total %</input_port>
             <input_port name="min_battery">Min battery % or voltage before triggering</input_port>
         </Condition>
+        <Action ID="IsCalledService">
+            <output_port name="member"/>
+            <input_port name="node"/>
+            <output_port name="status"/>
+        </Action>
         <Condition ID="IsPathValid">
             <input_port name="path"> Path to validate </input_port>
             <input_port name="server_timeout"> Server timeout </input_port>

@@ -1,0 +1,22 @@
+[0.013s] Invoking command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --build /home/oumuika/Documents/mirs2403/src/carry_project/build/carry -- -j16 -l16
+[0.060s] [35m[1mConsolidate compiler generated dependencies of target bt_executor[0m
+[0.072s] [ 25%] Built target test_client
+[0.090s] [ 37%] [32mBuilding CXX object CMakeFiles/bt_executor.dir/src/main.cpp.o[0m
+[2.217s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:[m[K In lambda function:
+[2.217s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:63:62:[m[K [01;31m[Kerror: [m[K‘[01m[Kros_node[m[K’ is not captured
+[2.217s]    63 |         return std::make_unique<SubscribePose>(name, config, [01;31m[Kros_node[m[K);
+[2.217s]       |                                                              [01;31m[K^~~~~~~~[m[K
+[2.218s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:62:37:[m[K [01;36m[Knote: [m[Kthe lambda has no capture-default
+[2.218s]    62 |     BT::NodeBuilder node_builder = [[01;36m[K][m[K(const std::string& name, const NodeConfiguration& config) {
+[2.218s]       |                                     [01;36m[K^[m[K
+[2.218s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:21:10:[m[K [01;36m[Knote: [m[K‘[01m[Kstd::shared_ptr<rclcpp::Node> ros_node[m[K’ declared here
+[2.218s]    21 |     auto [01;36m[Kros_node[m[K = rclcpp::Node::make_shared("bt_node");
+[2.218s]       |          [01;36m[K^~~~~~~~[m[K
+[2.218s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[2.218s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:64:5:[m[K [01;31m[Kerror: [m[Kconversion from ‘[01m[Kmain(int, char**)::<lambda(const string&, const BT::NodeConfiguration&)>[m[K’ to non-scalar type ‘[01m[KBT::NodeBuilder[m[K’ {aka ‘[01m[Kstd::function<std::unique_ptr<BT::TreeNode>(const std::__cxx11::basic_string<char>&, const BT::NodeConfiguration&)>[m[K’} requested
+[2.218s]    64 |     [01;31m[K}[m[K;
+[2.218s]       |     [01;31m[K^[m[K
+[3.920s] gmake[2]: *** [CMakeFiles/bt_executor.dir/build.make:76: CMakeFiles/bt_executor.dir/src/main.cpp.o] Error 1
+[3.920s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/bt_executor.dir/all] Error 2
+[3.921s] gmake: *** [Makefile:146: all] Error 2
+[3.925s] Invoked command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --build /home/oumuika/Documents/mirs2403/src/carry_project/build/carry -- -j16 -l16

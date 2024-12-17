@@ -1,0 +1,36 @@
+[0.014s] Invoking command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --build /home/oumuika/Documents/mirs2403/src/carry_project/build/carry -- -j16 -l16
+[0.065s] [35m[1mConsolidate compiler generated dependencies of target bt_executor[0m
+[0.074s] [ 25%] Built target test_client
+[0.100s] [ 37%] [32mBuilding CXX object CMakeFiles/bt_executor.dir/src/main.cpp.o[0m
+[6.710s] [ 50%] [32m[1mLinking CXX executable bt_executor[0m
+[7.426s] [100%] Built target bt_executor
+[7.439s] Invoked command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --build /home/oumuika/Documents/mirs2403/src/carry_project/build/carry -- -j16 -l16
+[7.484s] Invoking command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --install /home/oumuika/Documents/mirs2403/src/carry_project/build/carry
+[7.491s] -- Install configuration: ""
+[7.491s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/lib/carry/bt_executor
+[7.496s] -- Set runtime path of "/home/oumuika/Documents/mirs2403/src/carry_project/install/carry/lib/carry/bt_executor" to ""
+[7.496s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/lib/carry/test_client
+[7.497s] -- Set runtime path of "/home/oumuika/Documents/mirs2403/src/carry_project/install/carry/lib/carry/test_client" to ""
+[7.497s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/behavior_tree
+[7.497s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/behavior_tree/test_4.xml
+[7.497s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/behavior_tree/test.xml
+[7.497s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/behavior_tree/test_3.xml
+[7.497s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/behavior_tree/check.xml
+[7.498s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/behavior_tree/test_2.xml
+[7.498s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/behavior_tree/swtich_test.xml
+[7.498s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/ament_index/resource_index/package_run_dependencies/carry
+[7.498s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/ament_index/resource_index/parent_prefix_path/carry
+[7.498s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/environment/ament_prefix_path.sh
+[7.499s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/environment/ament_prefix_path.dsv
+[7.499s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/environment/path.sh
+[7.499s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/environment/path.dsv
+[7.499s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/local_setup.bash
+[7.499s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/local_setup.sh
+[7.499s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/local_setup.zsh
+[7.499s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/local_setup.dsv
+[7.500s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/package.dsv
+[7.500s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/ament_index/resource_index/packages/carry
+[7.500s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/cmake/carryConfig.cmake
+[7.500s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/cmake/carryConfig-version.cmake
+[7.500s] -- Installing: /home/oumuika/Documents/mirs2403/src/carry_project/install/carry/share/carry/package.xml
+[7.503s] Invoked command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --install /home/oumuika/Documents/mirs2403/src/carry_project/build/carry

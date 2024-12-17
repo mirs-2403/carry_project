@@ -1,0 +1,41 @@
+[0.014s] Invoking command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --build /home/oumuika/Documents/mirs2403/src/carry_project/build/carry -- -j16 -l16
+[0.062s] [35m[1mConsolidate compiler generated dependencies of target bt_executor[0m
+[0.072s] [ 25%] Built target test_client
+[0.094s] [ 37%] [32mBuilding CXX object CMakeFiles/bt_executor.dir/src/main.cpp.o[0m
+[2.161s] In file included from [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:7[m[K:
+[2.161s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/include/bt_actions/subscribe_pose.hpp:15:48:[m[K [01;31m[Kerror: [m[K‘[01m[KNodeConfig[m[K’ does not name a type
+[2.161s]    15 |   SubscribePose(const std::string& name, const [01;31m[KNodeConfig[m[K& config, rclcpp::Node::SharedPtr shared_node)
+[2.161s]       |                                                [01;31m[K^~~~~~~~~~[m[K
+[2.161s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/include/bt_actions/subscribe_pose.hpp:[m[K In constructor ‘[01m[KBT::SubscribePose::SubscribePose(const string&, const int&, rclcpp::Node::SharedPtr)[m[K’:
+[2.161s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/include/bt_actions/subscribe_pose.hpp:16:54:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KBT::SyncActionNode::SyncActionNode(const string&, const int&)[m[K’
+[2.161s]    16 |     : SyncActionNode(name, config), node_(shared_node[01;31m[K)[m[K
+[2.162s]       |                                                      [01;31m[K^[m[K
+[2.162s] In file included from [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/include/bt_actions/first_test.hpp:6[m[K,
+[2.162s]                  from [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:2[m[K:
+[2.162s] [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/action_node.h:55:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KBT::SyncActionNode::SyncActionNode(const string&, const BT::NodeConfiguration&)[m[K’
+[2.162s]    55 |   [01;36m[KSyncActionNode[m[K(const std::string& name, const NodeConfiguration& config);
+[2.162s]       |   [01;36m[K^~~~~~~~~~~~~~[m[K
+[2.162s] [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/action_node.h:55:68:[m[K [01;36m[Knote: [m[K  no known conversion for argument 2 from ‘[01m[Kconst int[m[K’ to ‘[01m[Kconst BT::NodeConfiguration&[m[K’
+[2.162s]    55 | ncActionNode(const std::string& name, [01;36m[Kconst NodeConfiguration& config[m[K);
+[2.162s]       |                                       [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~[m[K
+[2.162s] 
+[2.295s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[2.295s] [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:73:44:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KBT::BehaviorTreeFactory::registerNodeType<BT::SubscribePose>(const char [14], std::shared_ptr<rclcpp::Node>&)[m[K’
+[2.295s]    73 |     [01;31m[Kfactory.registerNodeType<SubscribePose>("SubscribePose", ros_node)[m[K;
+[2.295s]       |     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.295s] In file included from [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/include/bt_actions/first_test.hpp:7[m[K,
+[2.295s]                  from [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/main.cpp:2[m[K:
+[2.295s] [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/bt_factory.h:364:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid BT::BehaviorTreeFactory::registerNodeType(const string&) [with T = BT::SubscribePose; std::string = std::__cxx11::basic_string<char>][m[K’
+[2.295s]   364 |   void [01;36m[KregisterNodeType[m[K(const std::string& ID)
+[2.295s]       |        [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[2.295s] [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/bt_factory.h:364:8:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 2 provided
+[2.296s] [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/bt_factory.h:422:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid BT::BehaviorTreeFactory::registerNodeType(const string&, BT::PortsList) [with T = BT::SubscribePose; std::string = std::__cxx11::basic_string<char>; BT::PortsList = std::unordered_map<std::__cxx11::basic_string<char>, BT::PortInfo>][m[K’
+[2.296s]   422 |   void [01;36m[KregisterNodeType[m[K(const std::string& ID, PortsList ports)
+[2.296s]       |        [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[2.296s] [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/bt_factory.h:422:58:[m[K [01;36m[Knote: [m[K  no known conversion for argument 2 from ‘[01m[Kstd::shared_ptr<rclcpp::Node>[m[K’ to ‘[01m[KBT::PortsList[m[K’ {aka ‘[01m[Kstd::unordered_map<std::__cxx11::basic_string<char>, BT::PortInfo>[m[K’}
+[2.296s]   422 |   void registerNodeType(const std::string& ID, [01;36m[KPortsList ports[m[K)
+[2.296s]       |                                                [01;36m[K~~~~~~~~~~^~~~~[m[K
+[4.032s] gmake[2]: *** [CMakeFiles/bt_executor.dir/build.make:76: CMakeFiles/bt_executor.dir/src/main.cpp.o] Error 1
+[4.033s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/bt_executor.dir/all] Error 2
+[4.033s] gmake: *** [Makefile:146: all] Error 2
+[4.036s] Invoked command in '/home/oumuika/Documents/mirs2403/src/carry_project/build/carry' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/oumuika/Documents/mirs2403/install/web_with_ros2:/home/oumuika/Documents/mirs2403/install/ros2bag_extensions:/opt/ros/humble /usr/bin/cmake --build /home/oumuika/Documents/mirs2403/src/carry_project/build/carry -- -j16 -l16

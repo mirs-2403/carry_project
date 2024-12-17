@@ -1,0 +1,11 @@
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/uninstall.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/carry_uninstall.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/bt_executor.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/test_client.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/test.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/edit_cache.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/rebuild_cache.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/list_install_components.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/install.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/install/local.dir
+/home/oumuika/Documents/mirs2403/src/carry_project/build/carry/CMakeFiles/install/strip.dir

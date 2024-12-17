@@ -1,0 +1,28 @@
+[01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/check_call_service.cpp:[m[K In static member function ‘[01m[Kstatic BT::PortsList CheckCallService::providedPorts()[m[K’:
+[01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/check_call_service.cpp:24:24:[m[K [01;31m[Kerror: [m[K‘[01m[Kauto[m[K’ not permitted in template argument
+   24 |         BT::OutputPort<[01;31m[Kauto[m[K>("status")
+      |                        [01;31m[K^~~~[m[K
+[01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/check_call_service.cpp:24:29:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KOutputPort<<expression error> >(const char [7])[m[K’
+   24 |         [01;31m[KBT::OutputPort<auto>("status")[m[K
+      |         [01;31m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/tree_node.h:22[m[K,
+                 from [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/leaf_node.h:17[m[K,
+                 from [01m[K/opt/ros/humble/include/behaviortree_cpp_v3/action_node.h:22[m[K,
+                 from [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/include/bt_actions/check_call_service.hpp:6[m[K,
+                 from [01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/check_call_service.cpp:1[m[K:
+[01m[K/opt/ros/humble/include/behaviortree_cpp_v3/basic_types.h:309:41:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T> std::pair<std::__cxx11::basic_string<char>, BT::PortInfo> BT::OutputPort(BT::StringView, BT::StringView)[m[K’
+  309 | inline std::pair<std::string, PortInfo> [01;36m[KOutputPort[m[K(StringView name,
+      |                                         [01;36m[K^~~~~~~~~~[m[K
+[01m[K/opt/ros/humble/include/behaviortree_cpp_v3/basic_types.h:309:41:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/check_call_service.cpp:24:29:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   24 |         [01;31m[KBT::OutputPort<auto>("status")[m[K
+      |         [01;31m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~[m[K
+[01m[K/home/oumuika/Documents/mirs2403/src/carry_project/carry/src/check_call_service.cpp:25:5:[m[K [01;31m[Kerror: [m[Kcould not convert ‘[01m[K{BT::InputPort(BT::StringView, BT::StringView) [with T = std::shared_ptr<rclcpp::Node>; BT::StringView = nonstd::sv_lite::basic_string_view<char>](nonstd::sv_lite::basic_string_view<char>()), BT::OutputPort(BT::StringView, BT::StringView) [with T = double; BT::StringView = nonstd::sv_lite::basic_string_view<char>](nonstd::sv_lite::basic_string_view<char>()), <expression error>}[m[K’ from ‘[01m[K<brace-enclosed initializer list>[m[K’ to ‘[01m[KBT::PortsList[m[K’ {aka ‘[01m[Kstd::unordered_map<std::__cxx11::basic_string<char>, BT::PortInfo>[m[K’}
+   25 |     [01;31m[K}[m[K;
+      |     [01;31m[K^[m[K
+      |     [01;31m[K|[m[K
+      |     [01;31m[K<brace-enclosed initializer list>[m[K
+gmake[2]: *** [CMakeFiles/bt_executor.dir/build.make:132: CMakeFiles/bt_executor.dir/src/check_call_service.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/bt_executor.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
