@@ -26,12 +26,9 @@ public:
   {
     return {
       InputPort<std::string>("topic_name", "Name of the topic to subscribe to"),
-      InputPort<std::string>("output_key", "Key to store the PoseStamped data")
+      OutputPort<geometry_msgs::msg::PoseStamped>("goal")
     };
   }
-
-private:
-  rclcpp::Node::SharedPtr node_; // 共有ノード
 
   // 実行ロジック
   virtual NodeStatus tick() override
@@ -43,12 +40,6 @@ private:
     if (!getInput("topic_name", topic_name))
     {
       throw RuntimeError("Missing input port [topic_name]");
-    }
-
-    // 入力ポートから"output_key"を取得
-    if (!getInput("output_key", output_key))
-    {
-      throw RuntimeError("Missing input port [output_key]");
     }
 
     // サブスクライブ用のコールバック変数
@@ -81,7 +72,7 @@ private:
     // 受信したメッセージをBlackboardに保存
     if (message_received && received_pose)
     {
-      setOutput(output_key, *received_pose);
+      setOutput("goal", received_pose);
       RCLCPP_INFO(node_->get_logger(), "Message received and stored in Blackboard under key: %s", output_key.c_str());
       return NodeStatus::SUCCESS;
     }
@@ -89,6 +80,9 @@ private:
     RCLCPP_ERROR(node_->get_logger(), "Failed to receive a message on topic: %s", topic_name.c_str());
     return NodeStatus::FAILURE;
   }
+
+private:
+  rclcpp::Node::SharedPtr node_; // 共有ノード
 };
 
 } // namespace BT

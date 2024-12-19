@@ -53,9 +53,23 @@ ament_target_dependencies(test_client
   mirs_msgs
 )
 
+add_executable(jack_up src/jack_up.cpp)
+ament_target_dependencies(jack_up
+  rclcpp
+  mirs_msgs
+)
+
+add_executable(jack_down src/jack_down.cpp)
+ament_target_dependencies(jack_down
+  rclcpp
+  mirs_msgs
+)
+
 install(TARGETS
   bt_executor
   test_client
+  jack_up
+  jack_down
   DESTINATION lib/${PROJECT_NAME}
 )
 install(DIRECTORY
