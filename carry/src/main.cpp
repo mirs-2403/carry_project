@@ -7,6 +7,8 @@
 #include "bt_actions/subscribe_pose.hpp"
 #include "bt_actions/is_called_service.hpp"
 #include "bt_actions/compare_pose.hpp"
+#include "bt_actions/pose_setting.hpp"
+#include "bt_actions/footprint_setting.hpp"
 //#include "behaviortree_cpp/loggers/groot2_publisher.h"
 #include "behaviortree_cpp_v3/loggers/bt_zmq_publisher.h"
 #include "nav2_behavior_tree/plugins/action/navigate_to_pose_action.hpp"
@@ -69,7 +71,11 @@ int main(int argc, char **argv) {
     };
 
     BT::NodeBuilder node_builder2 = [&ros_node](const std::string& name, const NodeConfiguration& config) {
-        return std::make_unique<ComparePose>(name, config, ros_node);
+        return std::make_unique<PoseSetting>(name, config, ros_node);
+    };
+
+    BT::NodeBuilder node_builder3 = [&ros_node](const std::string& name, const NodeConfiguration& config) {
+        return std::make_unique<FootprintSetting>(name, config, ros_node);
     };
     
     // Actionノードの登録
@@ -80,7 +86,9 @@ int main(int argc, char **argv) {
     factory.registerNodeType<IsCalledService>("IsCalledService");
     factory.registerNodeType<PrintMessageAction>("PrintMessage");
     factory.registerBuilder<SubscribePose>("SubscribePose", node_builder);
-    factory.registerBuilder<ComparePose>("ComparePose", node_builder2);
+    factory.registerBuilder<ComparePose>("ComparePose", node_builder);
+    factory.registerBuilder<PoseSetting>("PoseSetting", node_builder2);
+    factory.registerBuilder<FootprintSetting>("FootprintSetting", node_builder3);
 
     std::vector<std::string> plugin_files;
 

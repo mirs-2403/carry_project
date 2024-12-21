@@ -3,8 +3,33 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
-            <Action ID="BackUp" backup_dist="0.5" backup_speed="-0.5" server_name="backup" server_timeout="" time_allowance=""/>
-            <Action ID="PrintMessage" message="END!"/>
+            <Action ID="FootprintSetting" global_radius="0.2" local_height="0.4" local_width="0.2"/>
+            <Action ID="PoseSetting" goal="{goal}" orientation_theta="0.0" position_x="-1.0" position_y="-1.0"/>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            <Action ID="FootprintSetting" global_radius="0.2" local_height="0.2" local_width="0.4"/>
+            <Action ID="PoseSetting" goal="{goal}" orientation_theta="1.57" position_x="1.0" position_y="1.0"/>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="MoveToUnderChair">
+        <Sequence>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            <KeepRunningUntilFailure>
+                <Inverter>
+                    <Fallback>
+                        <Action ID="SubscribePose" goal="{goal}" topic_name="/chair_pose"/>
+                        <Inverter>
+                            <Action ID="Spin" server_name="spin" server_timeout="" spin_dist="0.1745 " time_allowance=""/>
+                        </Inverter>
+                    </Fallback>
+                </Inverter>
+            </KeepRunningUntilFailure>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            <Sequence>
+                <Action ID="SubscribePose" goal="{goal}" topic_name="/aruco_pose"/>
+                <Action ID="NavigateToPose" behavior_tree="" goal="" server_name="" server_timeout=""/>
+            </Sequence>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -18,7 +43,10 @@
                             <Switch2 case_1="0" case_2="1" variable="">
                                 <Action ID="PrintMessage" message="rec"/>
                                 <Action ID="PrintMessage" message="fan"/>
-                                <AlwaysFailure/>
+                                <Sequence>
+                                    <Action ID="CancelControl" server_name="follw_path" server_timeout=""/>
+                                    <AlwaysFailure/>
+                                </Sequence>
                             </Switch2>
                         </Inverter>
                     </Delay>
@@ -130,6 +158,11 @@
             <input_port name="server_name">Server name</input_port>
             <input_port name="server_timeout">Server timeout</input_port>
         </Action>
+        <Action ID="FootprintSetting">
+            <input_port name="global_radius"/>
+            <input_port name="local_height"/>
+            <input_port name="local_width"/>
+        </Action>
         <Action ID="GenerateRandomGoal">
             <output_port name="goal"/>
         </Action>
@@ -169,6 +202,9 @@
             <input_port name="server_timeout"> Server timeout </input_port>
         </Condition>
         <Condition ID="IsStuck"/>
+        <SubTree ID="MoveToUnderChair">
+            <input_port default="false" name="__shared_blackboard">If false (default), the Subtree has an isolated blackboard and needs port remapping</input_port>
+        </SubTree>
         <Action ID="NavigateThroughPoses">
             <input_port name="behavior_tree">Behavior tree to run</input_port>
             <input_port name="goals">Goals</input_port>
@@ -195,6 +231,12 @@
             <input_port name="default_planner">Default planner of the planner selector</input_port>
             <output_port name="selected_planner">Name of the selected planner received from the topic subcription</output_port>
             <input_port name="topic_name">Name of the topic to receive planner selection commands</input_port>
+        </Action>
+        <Action ID="PoseSetting">
+            <output_port name="goal"/>
+            <input_port name="orientation_theta"/>
+            <input_port name="position_x"/>
+            <input_port name="position_y"/>
         </Action>
         <Action ID="PrintMessage">
             <input_port name="message"/>
@@ -249,6 +291,10 @@
             <input_port name="server_timeout">Server timeout</input_port>
             <input_port name="spin_dist">Spin distance</input_port>
             <input_port name="time_allowance">Allowed time for spinning</input_port>
+        </Action>
+        <Action ID="SubscribePose">
+            <output_port name="goal"/>
+            <input_port name="topic_name"/>
         </Action>
         <Condition ID="TimeExpired">
             <input_port name="seconds">Time to check if expired</input_port>
