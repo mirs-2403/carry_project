@@ -12,26 +12,27 @@ class JackMove : public SyncActionNode
 {
 public:
     // コンストラクタ
-    JackMove(const std::string& name, const NodeConfiguration& config, rclcpp::Node::SharedPtr ros_node)
-    : SyncActionNode(name, config), node_(ros_node)
+    JackMove(const std::string& name, const NodeConfiguration& config)
+    : SyncActionNode(name, config)
     {
-        if (!node_)
-        {
-            throw std::runtime_error("Shared node is null.");
-        }
+
     }
 
     // ノードの初期化や終了処理（必要に応じて）
-    static PortsList providedPorts(
+    static PortsList providedPorts(){
         return {
-            InputPort<std::string>("service_name")
+            InputPort<std::string>("service_name"),
+            InputPort<rclcpp::Node::SharedPtr>("node")
         };
-    );
+    };
 
     // tick()メソッド（Behavior Treeでの実行ロジック）
     NodeStatus tick() override 
     {
         std::string service_name;
+
+        auto node = getInput<rclcpp::Node::SharedPtr>("node");
+        node_ = node.value();
 
         // 入力ポートから"service_name"を取得
         if (!getInput("service_name", service_name))
@@ -39,9 +40,14 @@ public:
             throw RuntimeError("Missing input port [topic_name]");
         }
 
-        if (!client_->wait_for_service(std::chrono::seconds(1))) {
-            RCLCPP_ERROR(node_->get_logger(), "Service not available");
-            return BT::NodeStatus::FAILURE;
+        client_ = node_->create_client<mirs_msgs::srv::SimpleCommand>(service_name);
+
+        while(!client_->wait_for_service(std::chrono::seconds(1))){
+            if (!rclcpp::ok()) {
+                RCLCPP_ERROR(node_->get_logger(), "Interrupted while waiting for the service. Exiting.");
+                return BT::NodeStatus::FAILURE;
+            }
+            RCLCPP_INFO(node_->get_logger(), "service not available, waiting again...");
         }
 
         auto request = std::make_shared<mirs_msgs::srv::SimpleCommand::Request>();

@@ -66,6 +66,7 @@ public:
         }
 
         max_publish_count_ = 10;
+        publish_count_ = 0;
 
         while (publish_count_ < max_publish_count_ && rclcpp::ok()) {
             publisher->publish(footprint);
@@ -73,7 +74,7 @@ public:
             RCLCPP_INFO(node_->get_logger(), "Published Footprint %d/%d", publish_count_, max_publish_count_);
 
             // 適切な間隔を持たせるためにスリープ
-            rclcpp::Rate(1).sleep();  // 1Hzでパブリッシュ
+            rclcpp::Rate(std::chrono::milliseconds(100)).sleep();  // 1Hzでパブリッシュ
         }
 
         if (publish_count_ >= max_publish_count_) {

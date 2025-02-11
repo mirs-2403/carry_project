@@ -1,4 +1,6 @@
 int32 number_of_people
 int32 arrangement_pattern
+int32 location
 ---
 bool success
+

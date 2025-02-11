@@ -3,43 +3,154 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
-            <SubTree ID="WaitUntilServerCelled" __shared_blackboard="true"/>
-            <SubTree ID="MoveToUnderChair" __shared_blackboard="true"/>
-            <Action ID="PrintMessage" message="END"/>
+            <SubTree ID="test_publish" __shared_blackboard="true"/>
+            <Sequence>
+                <Action ID="JackMove" node="{node}" service_name="jack_down"/>
+                <Delay delay_msec="20000">
+                    <AlwaysSuccess/>
+                </Delay>
+            </Sequence>
+            <Sequence>
+                <SubTree ID="MoveChair" __shared_blackboard="true"/>
+                <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="3" position_y="-1.75"/>
+                <SubTree ID="PutAndGoHome" __shared_blackboard="true"/>
+            </Sequence>
+            <Sequence>
+                <SubTree ID="MoveChair" __shared_blackboard="true"/>
+                <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="3" position_y="-1.1"/>
+                <SubTree ID="PutAndGoHome" __shared_blackboard="true"/>
+            </Sequence>
+            <Sequence>
+                <SubTree ID="MoveChair" __shared_blackboard="true"/>
+                <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="3" position_y="-0.45"/>
+                <SubTree ID="PutAndGoHome" __shared_blackboard="true"/>
+            </Sequence>
+            <Sequence>
+                <SubTree ID="MoveChair" __shared_blackboard="true"/>
+                <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="2" position_y="-1.75"/>
+                <SubTree ID="PutAndGoHome" __shared_blackboard="true"/>
+            </Sequence>
+            <Sequence>
+                <SubTree ID="MoveChair" __shared_blackboard="true"/>
+                <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="2" position_y="-1.1"/>
+                <SubTree ID="PutAndGoHome" __shared_blackboard="true"/>
+            </Sequence>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="FindAndGo">
+        <Sequence>
+            <Sequence>
+                <Inverter>
+                    <KeepRunningUntilFailure>
+                        <Inverter>
+                            <Fallback>
+                                <Action ID="CheckMarker" camera_id="1" get_marker_pose="get_marker_pose_2" node="{node}" pose="{pose}"/>
+                                <Sequence>
+                                    <Action ID="Spin" is_recovery="" server_name="spin" server_timeout="" spin_dist="0.1" time_allowance=""/>
+                                    <Delay delay_msec="1000">
+                                        <Sequence>
+                                            <Action ID="PrintMessage" message="recover"/>
+                                            <AlwaysFailure/>
+                                        </Sequence>
+                                    </Delay>
+                                </Sequence>
+                            </Fallback>
+                        </Inverter>
+                    </KeepRunningUntilFailure>
+                </Inverter>
+                <Action ID="FootprintSetting" global_radius="0.23" local_height="0.46" local_width="0.46"/>
+                <Action ID="BackPose" distance="0.85" goal="{goal}" pose="{pose}"/>
+                <Action ID="PublishTest" goal="{pose}" node="{node}"/>
+                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+                <Action ID="PrintMessage" message="STEP1"/>
+            </Sequence>
+            <Sequence>
+                <Inverter>
+                    <KeepRunningUntilFailure>
+                        <Inverter>
+                            <Fallback>
+                                <Action ID="CheckMarker" camera_id="1" get_marker_pose="get_marker_pose_2" node="{node}" pose="{pose}"/>
+                                <Sequence>
+                                    <Action ID="Spin" is_recovery="" server_name="spin" server_timeout="" spin_dist="0.1" time_allowance=""/>
+                                    <Delay delay_msec="1000">
+                                        <Sequence>
+                                            <Action ID="PrintMessage" message="recover"/>
+                                            <AlwaysFailure/>
+                                        </Sequence>
+                                    </Delay>
+                                </Sequence>
+                            </Fallback>
+                        </Inverter>
+                    </KeepRunningUntilFailure>
+                </Inverter>
+                <Action ID="FootprintSetting" global_radius="0.1" local_height="0.1" local_width="0.1"/>
+                <Action ID="BackPose" distance="-0.1" goal="{goal}" pose="{pose}"/>
+                <Action ID="PublishTest" goal="{goal}" node="{node}"/>
+                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+                <Action ID="PrintMessage" message="STEP2"/>
+            </Sequence>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="MoveChair">
+        <Sequence>
+            <SubTree ID="FindAndGo" __shared_blackboard="true"/>
+            <Sequence>
+                <Action ID="JackMove" node="{node}" service_name="jack_up"/>
+                <Delay delay_msec="30000">
+                    <AlwaysSuccess/>
+                </Delay>
+            </Sequence>
+            <Action ID="FootprintSetting" global_radius="0.6" local_height="0.46" local_width="0.48"/>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
     <BehaviorTree ID="MoveToUnderChair">
         <Sequence>
+            <Action ID="FootprintSetting" global_radius="0.2" local_height="0.2" local_width="0.2"/>
+            <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="1.5" position_y="-3.5"/>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
             <KeepRunningUntilFailure>
                 <Inverter>
-                    <Sequence>
-                        <Action ID="FootprintSetting" global_radius="0.2" local_height="0.2" local_width="0.2"/>
-                        <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="1.5" position_y="-3.5"/>
-                        <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
-                        <KeepRunningUntilFailure>
-                            <Inverter>
-                                <Fallback>
-                                    <Action ID="SubscribePose" goal="{goal}" topic_name="/chair_pose"/>
-                                    <Inverter>
-                                        <Action ID="Spin" server_name="spin" server_timeout="" spin_dist="0.1745 " time_allowance=""/>
-                                    </Inverter>
-                                </Fallback>
-                            </Inverter>
-                        </KeepRunningUntilFailure>
-                        <Action ID="FootprintSetting" global_radius="0.1" local_height="0.1" local_width="0.1"/>
-                        <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
-                        <Sequence>
-                            <Action ID="SubscribePose" goal="{goal}" topic_name="/aruco_pose"/>
-                            <IfThenElse>
-                                <Action ID="ComparePose" target_pose="{goal}"/>
-                                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
-                                <AlwaysFailure/>
-                            </IfThenElse>
-                        </Sequence>
-                    </Sequence>
+                    <Fallback>
+                        <Action ID="SubscribePose" goal="{goal}" topic_name="/chair_pose"/>
+                        <Inverter>
+                            <Action ID="Spin" is_recovery="" server_name="spin" server_timeout="" spin_dist="0.1745 " time_allowance=""/>
+                        </Inverter>
+                    </Fallback>
                 </Inverter>
             </KeepRunningUntilFailure>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            <Sequence>
+                <Fallback>
+                    <Action ID="SubscribePose" goal="{goal}" topic_name="/aruco_pose"/>
+                </Fallback>
+                <Action ID="NavigateToPose" behavior_tree="" goal="" server_name="" server_timeout=""/>
+            </Sequence>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="PutAndGoHome">
+        <Sequence>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            <Sequence>
+                <Action ID="JackMove" node="{node}" service_name="jack_down"/>
+                <Delay delay_msec="30000">
+                    <AlwaysSuccess/>
+                </Delay>
+            </Sequence>
+            <Sequence>
+                <Inverter>
+                    <KeepRunningUntilFailure>
+                        <Inverter>
+                            <Action ID="BackUp" backup_dist="0.40" backup_speed="0.2" server_name="backup" server_timeout="" time_allowance=""/>
+                        </Inverter>
+                    </KeepRunningUntilFailure>
+                </Inverter>
+                <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="0" position_y="0"/>
+                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            </Sequence>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -50,15 +161,27 @@
                 <KeepRunningUntilFailure>
                     <Delay delay_msec="250">
                         <Inverter>
-                            <Switch2 case_1="0" case_2="1" variable="{status}">
+                            <Switch3 case_1="0" case_2="1" case_3="2" variable="{status}">
                                 <Action ID="PrintMessage" message="rec"/>
                                 <Action ID="PrintMessage" message="fan"/>
+                                <Action ID="PrintMessage" message="none"/>
                                 <AlwaysFailure/>
-                            </Switch2>
+                            </Switch3>
                         </Inverter>
                     </Delay>
                 </KeepRunningUntilFailure>
             </Inverter>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="test_publish">
+        <Sequence>
+            <Action ID="PoseSetting" goal="{goal1}" orientation_theta="0" position_x="3" position_y="-1.75"/>
+            <Action ID="PoseSetting" goal="{node}" orientation_theta="0" position_x="3" position_y="-1.1"/>
+            <Action ID="PoseSetting" goal="{node}" orientation_theta="0" position_x="3" position_y="-0.45"/>
+            <Action ID="PoseSetting" goal="{node}" orientation_theta="0" position_x="2" position_y="-1.75"/>
+            <Action ID="PoseSetting" goal="{node}" orientation_theta="0" position_x="2" position_y="-1.1"/>
+            <Action ID="PublishChairPosition" goal1="{goal1}" goal2="{goal2}" goal3="{goal3}" goal4="{goal4}" goal5="{goal5}" node="{node}"/>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -68,6 +191,11 @@
             <input_port name="server_name">Service name</input_port>
             <input_port name="server_timeout">Server timeout</input_port>
             <input_port name="time_allowance">Allowed time for spinning</input_port>
+        </Action>
+        <Action ID="BackPose">
+            <input_port name="distance"/>
+            <output_port name="goal"/>
+            <input_port name="pose"/>
         </Action>
         <Action ID="BackUp">
             <input_port name="backup_dist">Distance to backup</input_port>
@@ -105,6 +233,12 @@
             <input_port name="node"/>
             <output_port name="status"/>
         </Action>
+        <Action ID="CheckMarker">
+            <input_port name="camera_id" type="int"/>
+            <input_port name="get_marker_pose" type="std::string"/>
+            <input_port name="node" type="std::shared_ptr&lt;rclcpp::Node&gt;"/>
+            <output_port name="pose" type="geometry_msgs::msg::PoseStamped_&lt;std::allocator&lt;void&gt; &gt;"/>
+        </Action>
         <Action ID="ClearCostmapAroundRobot">
             <input_port name="reset_distance">Distance from the robot under which obstacles are cleared</input_port>
             <input_port name="server_timeout">Server timeout</input_port>
@@ -118,9 +252,6 @@
         <Action ID="ClearEntireCostmap">
             <input_port name="server_timeout">Server timeout</input_port>
             <input_port name="service_name">Service name</input_port>
-        </Action>
-        <Action ID="ComparePose">
-            <input_port name="target_pose"/>
         </Action>
         <Action ID="ComputePathThroughPoses">
             <input_port name="goals">Destinations to plan through</input_port>
@@ -154,12 +285,15 @@
             <input_port name="robot_base_frame">Robot frame to check relative to global_frame</input_port>
         </Condition>
         <Action ID="DriveOnHeading">
-            <input_port name="dist_to_travel">Distance to travel</input_port>
-            <input_port name="server_name">Server name</input_port>
-            <input_port name="server_timeout">Server timeout</input_port>
-            <input_port name="speed">Speed at which to travel</input_port>
-            <input_port name="time_allowance">Allowed time for reversing</input_port>
+            <input_port name="dist_to_travel" type="double">Distance to travel</input_port>
+            <input_port name="server_name" type="std::string">Action server name</input_port>
+            <input_port name="server_timeout" type="std::chrono::duration&lt;long, std::ratio&lt;1l, 1000l&gt; &gt;"/>
+            <input_port name="speed" type="double">Speed at which to travel</input_port>
+            <input_port name="time_allowance" type="double">Allowed time for driving on heading</input_port>
         </Action>
+        <SubTree ID="FindAndGo">
+            <input_port default="true" name="__shared_blackboard">If false (default), the Subtree has an isolated blackboard and needs port remapping</input_port>
+        </SubTree>
         <Action ID="FirstClientCall"/>
         <Action ID="FollowPath">
             <input_port default="FollowPath" name="controller_id"/>
@@ -169,9 +303,9 @@
             <input_port name="server_timeout">Server timeout</input_port>
         </Action>
         <Action ID="FootprintSetting">
-            <input_port name="global_radius"/>
-            <input_port name="local_height"/>
-            <input_port name="local_width"/>
+            <input_port name="global_radius" type="float"/>
+            <input_port name="local_height" type="float"/>
+            <input_port name="local_width" type="float"/>
         </Action>
         <Action ID="GenerateRandomGoal">
             <output_port name="goal"/>
@@ -203,16 +337,27 @@
             <input_port name="min_battery">Min battery % or voltage before triggering</input_port>
         </Condition>
         <Action ID="IsCalledService">
-            <output_port name="location"/>
-            <output_port name="member"/>
+            <output_port name="location" type="int"/>
+            <output_port name="member" type="int"/>
+            <input_port name="node" type="std::shared_ptr&lt;rclcpp::Node&gt;"/>
+            <output_port name="status" type="std::string"/>
+        </Action>
+        <Action ID="IsChairDetected">
+            <output_port name="goal"/>
             <input_port name="node"/>
-            <output_port name="status"/>
         </Action>
         <Condition ID="IsPathValid">
             <input_port name="path"> Path to validate </input_port>
             <input_port name="server_timeout"> Server timeout </input_port>
         </Condition>
         <Condition ID="IsStuck"/>
+        <Action ID="JackMove">
+            <input_port name="node" type="std::shared_ptr&lt;rclcpp::Node&gt;"/>
+            <input_port name="service_name" type="std::string"/>
+        </Action>
+        <SubTree ID="MoveChair">
+            <input_port default="true" name="__shared_blackboard">If false (default), the Subtree has an isolated blackboard and needs port remapping</input_port>
+        </SubTree>
         <SubTree ID="MoveToUnderChair">
             <input_port default="false" name="__shared_blackboard">If false (default), the Subtree has an isolated blackboard and needs port remapping</input_port>
         </SubTree>
@@ -223,10 +368,10 @@
             <input_port name="server_timeout">Server timeout</input_port>
         </Action>
         <Action ID="NavigateToPose">
-            <input_port name="behavior_tree">Behavior tree to run</input_port>
-            <input_port name="goal">Goal</input_port>
-            <input_port name="server_name">Server name</input_port>
-            <input_port name="server_timeout">Server timeout</input_port>
+            <input_port name="behavior_tree" type="std::string">Behavior tree to run</input_port>
+            <input_port name="goal" type="geometry_msgs::msg::PoseStamped_&lt;std::allocator&lt;void&gt; &gt;">Destination to plan to</input_port>
+            <input_port name="server_name" type="std::string">Action server name</input_port>
+            <input_port name="server_timeout" type="std::chrono::duration&lt;long, std::ratio&lt;1l, 1000l&gt; &gt;"/>
         </Action>
         <Condition ID="PathExpiringTimer">
             <input_port name="path">Check if path has been updated to enable timer reset</input_port>
@@ -250,12 +395,32 @@
             <input_port name="position_y"/>
         </Action>
         <Action ID="PrintMessage">
-            <input_port name="message"/>
+            <input_port name="message" type="std::string"/>
         </Action>
         <Action ID="ProgressCheckerSelector">
             <input_port name="default_progress_checker">Default progress checker of the controller selector</input_port>
             <output_port name="selected_progress_checker">Name of the selected progress checker received from the topic subcription</output_port>
             <input_port name="topic_name">Name of the topic to receive progress checker selection commands</input_port>
+        </Action>
+        <Action ID="PublishChairPosition">
+            <input_port name="goal1"/>
+            <input_port name="goal2"/>
+            <input_port name="goal3"/>
+            <input_port name="goal4"/>
+            <input_port name="goal5"/>
+            <input_port name="node"/>
+        </Action>
+        <Action ID="PublishTest">
+            <input_port name="goal" type="geometry_msgs::msg::PoseStamped_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <input_port name="node" type="std::shared_ptr&lt;rclcpp::Node&gt;"/>
+        </Action>
+        <SubTree ID="PutAndGoHome">
+            <input_port default="true" name="__shared_blackboard">If false (default), the Subtree has an isolated blackboard and needs port remapping</input_port>
+        </SubTree>
+        <Action ID="RadToMarker">
+            <input_port name="camera_id"/>
+            <input_port name="node"/>
+            <output_port name="rad"/>
         </Action>
         <Decorator ID="RateController">
             <input_port name="hz">Rate</input_port>
@@ -298,10 +463,11 @@
             <input_port name="min_speed">Minimum speed</input_port>
         </Decorator>
         <Action ID="Spin">
-            <input_port name="server_name">Server name</input_port>
-            <input_port name="server_timeout">Server timeout</input_port>
-            <input_port name="spin_dist">Spin distance</input_port>
-            <input_port name="time_allowance">Allowed time for spinning</input_port>
+            <input_port name="is_recovery" type="bool">True if recovery</input_port>
+            <input_port name="server_name" type="std::string">Action server name</input_port>
+            <input_port name="server_timeout" type="std::chrono::duration&lt;long, std::ratio&lt;1l, 1000l&gt; &gt;"/>
+            <input_port name="spin_dist" type="double">Spin distance</input_port>
+            <input_port name="time_allowance" type="double">Allowed time for spinning</input_port>
         </Action>
         <Action ID="SubscribePose">
             <output_port name="goal"/>
@@ -336,6 +502,9 @@
         </Action>
         <SubTree ID="WaitUntilServerCelled">
             <input_port default="false" name="__shared_blackboard">If false (default), the Subtree has an isolated blackboard and needs port remapping</input_port>
+        </SubTree>
+        <SubTree ID="test_publish">
+            <input_port default="true" name="__shared_blackboard">If false (default), the Subtree has an isolated blackboard and needs port remapping</input_port>
         </SubTree>
     </TreeNodesModel>
     <!-- ////////// -->

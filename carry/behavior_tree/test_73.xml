@@ -3,43 +3,50 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
-            <SubTree ID="WaitUntilServerCelled" __shared_blackboard="true"/>
-            <SubTree ID="MoveToUnderChair" __shared_blackboard="true"/>
-            <Action ID="PrintMessage" message="END"/>
+            <Sequence>
+                <Action ID="CheckMarker" camera_id="2" get_marker_pose="get_marker_pose_1" node="{node}" pose="{pose}"/>
+                <Action ID="FootprintSetting" global_radius="0.2" local_height="0.4" local_width="0.4"/>
+                <Action ID="BackPose" goal="{goal}" pose="{pose}"/>
+                <Action ID="PublishTest" goal="{goal}" node="{node}"/>
+                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            </Sequence>
+            <Sequence>
+                <Action ID="FootprintSetting" global_radius="0.15" local_height="0.3" local_width="0.3"/>
+                <Action ID="CheckMarker" camera_id="2" get_marker_pose="get_marker_pose_1" node="{node}" pose="{goal}"/>
+                <Action ID="PublishTest" goal="{goal}" node="{node}"/>
+                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            </Sequence>
+            <Sequence>
+                <Action ID="CheckMarker" camera_id="1" get_marker_pose="get_marker_pose_2" node="{node}" pose="{goal}"/>
+                <Action ID="PublishTest" goal="{goal}" node="{node}"/>
+                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+                <Action ID="PrintMessage" message="END"/>
+            </Sequence>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
     <BehaviorTree ID="MoveToUnderChair">
         <Sequence>
+            <Action ID="FootprintSetting" global_radius="0.2" local_height="0.2" local_width="0.2"/>
+            <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="1.5" position_y="-3.5"/>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
             <KeepRunningUntilFailure>
                 <Inverter>
-                    <Sequence>
-                        <Action ID="FootprintSetting" global_radius="0.2" local_height="0.2" local_width="0.2"/>
-                        <Action ID="PoseSetting" goal="{goal}" orientation_theta="0" position_x="1.5" position_y="-3.5"/>
-                        <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
-                        <KeepRunningUntilFailure>
-                            <Inverter>
-                                <Fallback>
-                                    <Action ID="SubscribePose" goal="{goal}" topic_name="/chair_pose"/>
-                                    <Inverter>
-                                        <Action ID="Spin" server_name="spin" server_timeout="" spin_dist="0.1745 " time_allowance=""/>
-                                    </Inverter>
-                                </Fallback>
-                            </Inverter>
-                        </KeepRunningUntilFailure>
-                        <Action ID="FootprintSetting" global_radius="0.1" local_height="0.1" local_width="0.1"/>
-                        <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
-                        <Sequence>
-                            <Action ID="SubscribePose" goal="{goal}" topic_name="/aruco_pose"/>
-                            <IfThenElse>
-                                <Action ID="ComparePose" target_pose="{goal}"/>
-                                <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
-                                <AlwaysFailure/>
-                            </IfThenElse>
-                        </Sequence>
-                    </Sequence>
+                    <Fallback>
+                        <Action ID="SubscribePose" goal="{goal}" topic_name="/chair_pose"/>
+                        <Inverter>
+                            <Action ID="Spin" server_name="spin" server_timeout="" spin_dist="0.1745 " time_allowance=""/>
+                        </Inverter>
+                    </Fallback>
                 </Inverter>
             </KeepRunningUntilFailure>
+            <Action ID="NavigateToPose" behavior_tree="" goal="{goal}" server_name="navigate_to_pose" server_timeout=""/>
+            <Sequence>
+                <Fallback>
+                    <Action ID="SubscribePose" goal="{goal}" topic_name="/aruco_pose"/>
+                </Fallback>
+                <Action ID="NavigateToPose" behavior_tree="" goal="" server_name="" server_timeout=""/>
+            </Sequence>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -68,6 +75,10 @@
             <input_port name="server_name">Service name</input_port>
             <input_port name="server_timeout">Server timeout</input_port>
             <input_port name="time_allowance">Allowed time for spinning</input_port>
+        </Action>
+        <Action ID="BackPose">
+            <output_port name="goal"/>
+            <input_port name="pose"/>
         </Action>
         <Action ID="BackUp">
             <input_port name="backup_dist">Distance to backup</input_port>
@@ -105,6 +116,12 @@
             <input_port name="node"/>
             <output_port name="status"/>
         </Action>
+        <Action ID="CheckMarker">
+            <input_port name="camera_id"/>
+            <input_port name="get_marker_pose"/>
+            <input_port name="node"/>
+            <output_port name="pose"/>
+        </Action>
         <Action ID="ClearCostmapAroundRobot">
             <input_port name="reset_distance">Distance from the robot under which obstacles are cleared</input_port>
             <input_port name="server_timeout">Server timeout</input_port>
@@ -118,9 +135,6 @@
         <Action ID="ClearEntireCostmap">
             <input_port name="server_timeout">Server timeout</input_port>
             <input_port name="service_name">Service name</input_port>
-        </Action>
-        <Action ID="ComparePose">
-            <input_port name="target_pose"/>
         </Action>
         <Action ID="ComputePathThroughPoses">
             <input_port name="goals">Destinations to plan through</input_port>
@@ -208,6 +222,10 @@
             <input_port name="node"/>
             <output_port name="status"/>
         </Action>
+        <Action ID="IsChairDetected">
+            <output_port name="goal"/>
+            <input_port name="node"/>
+        </Action>
         <Condition ID="IsPathValid">
             <input_port name="path"> Path to validate </input_port>
             <input_port name="server_timeout"> Server timeout </input_port>
@@ -256,6 +274,15 @@
             <input_port name="default_progress_checker">Default progress checker of the controller selector</input_port>
             <output_port name="selected_progress_checker">Name of the selected progress checker received from the topic subcription</output_port>
             <input_port name="topic_name">Name of the topic to receive progress checker selection commands</input_port>
+        </Action>
+        <Action ID="PublishTest">
+            <input_port name="goal"/>
+            <input_port name="node"/>
+        </Action>
+        <Action ID="RadToMarker">
+            <input_port name="camera_id"/>
+            <input_port name="node"/>
+            <output_port name="rad"/>
         </Action>
         <Decorator ID="RateController">
             <input_port name="hz">Rate</input_port>

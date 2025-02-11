@@ -9,13 +9,14 @@ find_package(rclcpp_action REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)
 find_package(mirs_msgs REQUIRED)
 find_package(carry_msgs REQUIRED)
-
+find_package(ros2_aruco_interfaces REQUIRED)
 find_package(nav2_util REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(nav2_bt_navigator REQUIRED)
 find_package(nav2_behavior_tree REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 
@@ -35,6 +36,7 @@ ament_target_dependencies(bt_executor
   rclcpp_action
   mirs_msgs
   carry_msgs
+  ros2_aruco_interfaces
   #behaviortree_cpp
   behaviortree_cpp_v3
   nav2_util
@@ -42,6 +44,7 @@ ament_target_dependencies(bt_executor
   nav2_msgs
   nav2_bt_navigator
   geometry_msgs
+  visualization_msgs
   tf2
   tf2_ros
   nav2_behavior_tree
@@ -72,6 +75,7 @@ install(TARGETS
   jack_down
   DESTINATION lib/${PROJECT_NAME}
 )
+
 install(DIRECTORY
   behavior_tree
   DESTINATION share/${PROJECT_NAME}

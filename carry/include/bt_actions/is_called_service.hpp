@@ -21,7 +21,7 @@ public:
 
       node_ = node.value();
 
-      service_ = node_->create_service<carry_msgs::srv::ChairArrangement>("test_service", std::bind(&IsCalledService::setBlackboard, this, std::placeholders::_1, std::placeholders::_2));
+      service_ = node_->create_service<carry_msgs::srv::ChairArrangement>("chair_arrangement_service", std::bind(&IsCalledService::setBlackboard, this, std::placeholders::_1, std::placeholders::_2));
       RCLCPP_INFO(node_->get_logger(), "Make service");
   }
 
@@ -34,8 +34,9 @@ public:
   {
       return {
           BT::InputPort<rclcpp::Node::SharedPtr>("node"),
-          BT::OutputPort<std::double_t>("member"),
-          BT::OutputPort<std::string>("status")
+          BT::OutputPort<std::int32_t>("member"),
+          BT::OutputPort<std::string>("status"),
+          BT::OutputPort<std::int32_t>("location")
       };
   }
   
@@ -46,15 +47,17 @@ private:
     void setBlackboard(const std::shared_ptr<carry_msgs::srv::ChairArrangement::Request> request, std::shared_ptr<carry_msgs::srv::ChairArrangement::Response> response)
     {
         RCLCPP_INFO(node_->get_logger(), "Received");
-        if(request->arrangement_pattern == 0){
+        if(request->arrangement_pattern == 2){
             setOutput("status", "0");
-        }else if(request->arrangement_pattern == 1){
+        }else if(request->arrangement_pattern == 3){
             setOutput("status", "1");
         }else{
             RCLCPP_INFO(node_->get_logger(), "Worrong arrangement type");
+            setOutput("status", "2");
             response->success = false;
         }
         setOutput("member", request->number_of_people);
+        setOutput("location", request->location);
         RCLCPP_INFO(node_->get_logger(), "Set Parameter");
         response->success = true;
     }

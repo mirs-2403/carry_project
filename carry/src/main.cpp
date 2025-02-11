@@ -9,6 +9,13 @@
 #include "bt_actions/compare_pose.hpp"
 #include "bt_actions/pose_setting.hpp"
 #include "bt_actions/footprint_setting.hpp"
+#include "bt_actions/check_marker.hpp"
+#include "bt_actions/is_chair_detected.hpp"
+#include "bt_actions/publish_test.hpp"
+#include "bt_actions/back_pose.hpp"
+#include "bt_actions/rad_to_marker.hpp"
+#include "bt_actions/jack_move.hpp"
+#include "bt_actions/publish_chair_position.hpp"
 //#include "behaviortree_cpp/loggers/groot2_publisher.h"
 #include "behaviortree_cpp_v3/loggers/bt_zmq_publisher.h"
 #include "nav2_behavior_tree/plugins/action/navigate_to_pose_action.hpp"
@@ -85,6 +92,13 @@ int main(int argc, char **argv) {
     factory.registerNodeType<CheckCallService>("CheckCallService");
     factory.registerNodeType<IsCalledService>("IsCalledService");
     factory.registerNodeType<PrintMessageAction>("PrintMessage");
+    factory.registerNodeType<CheckMarker>("CheckMarker");
+    factory.registerNodeType<IsChairDetected>("IsChairDetected");
+    factory.registerNodeType<PublishTest>("PublishTest");
+    factory.registerNodeType<BackPose>("BackPose");
+    factory.registerNodeType<RadToMarker>("RadToMarker");
+    factory.registerNodeType<JackMove>("JackMove");
+    factory.registerNodeType<PublishChairPosition>("PublishChairPosition");
     factory.registerBuilder<SubscribePose>("SubscribePose", node_builder);
     factory.registerBuilder<ComparePose>("ComparePose", node_builder);
     factory.registerBuilder<PoseSetting>("PoseSetting", node_builder2);
